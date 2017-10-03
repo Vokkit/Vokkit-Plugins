@@ -1,0 +1,8 @@
+{
+    "name":"EssentialCommands",
+    "version":"v0.0.1",
+    "server-plugin":"server",
+    "client-plugin":"client",
+    "server-main":"index.js",
+    "client-main":"index.js"
+}

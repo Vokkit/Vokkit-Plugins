@@ -1,9 +1,9 @@
-class BaseLang{
-  constructor() {
+class BaseLang {
+  constructor () {
     this.data = {}
   }
 
-  format(key, args = []) {
+  format (key, args = []) {
     var ans = this.data[key]
     for (var i in args) {
       ans = ans.replace('%s', args[i])

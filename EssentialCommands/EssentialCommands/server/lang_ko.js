@@ -1,7 +1,7 @@
 const BaseLang = require('./BaseLang.js')
 
-class lang_ko extends BaseLang{
-  constructor() {
+class lang_ko extends BaseLang {
+  constructor () {
     super()
     this.data = {
       write_player_name: '플레이어 이름을 작성해 주세요.',

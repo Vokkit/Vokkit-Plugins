@@ -2,14 +2,14 @@ const Command = require('../../../../src/io/github/Vokkit/command/commands/Comma
 const ParameterType = require('../../../../src/io/github/Vokkit/command/parameter/ParameterType.js')
 
 class KickCommand extends Command {
-  constructor() {
+  constructor () {
     super('kick', '플레이어를 추방합니다.', '/kick <Player>', [
       [ParameterType.PLAYER],
       [ParameterType.PLAYER, ParameterType.STRING]
     ])
   }
 
-  execute(parameterNumber, sender, parameter) {
+  execute (parameterNumber, sender, parameter) {
     let player
     switch (parameterNumber) {
       case 0:

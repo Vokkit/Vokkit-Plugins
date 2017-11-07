@@ -1,7 +1,7 @@
 const BaseLang = require('./BaseLang.js')
 
-class Lang extends BaseLang{
-  constructor(language) {
+class Lang extends BaseLang {
+  constructor (language) {
     super()
     if (language === 'ko') {
       this.data = {

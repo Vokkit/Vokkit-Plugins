@@ -1,15 +1,15 @@
-var PluginBase = require('../../../public/src/io/github/Vokkit/plugin/PluginBase.js')
+var PluginBase = require('../../../public/src/plugin/PluginBase.js')
 
 const lang = new (require('./Lang.js'))(navigator.language)
 
-class Main extends PluginBase{
-  onLoad() {
-    Vokkit.getClient().getSocket().on('kick', function(data) {
+class Main extends PluginBase {
+  onLoad () {
+    Vokkit.getClient().getSocket().on('kick', function (data) {
       alert(lang.format('kick', [data.reason]))
       location.reload()
     })
 
-    Vokkit.getClient().getSocket().on('ban', function(data) {
+    Vokkit.getClient().getSocket().on('ban', function (data) {
       alert(lang.format('ban', [data.reason]))
       location.reload()
     })

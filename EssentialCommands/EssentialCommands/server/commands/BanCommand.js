@@ -7,11 +7,11 @@ const path = require('path')
 let bannedPlayers = []
 const banPath = path.resolve('') + '\\ban.txt'
 
-//Vokkit에 언어 관련 설정이 없으므로 한국어로 고정합니다.
-const lang = new (require('../lang_ko.js'))
+// Vokkit에 언어 관련 설정이 없으므로 한국어로 고정합니다.
+const lang = new (require('../lang_ko.js'))()
 
 class BanCommand extends Command {
-  constructor() {
+  constructor () {
     super('ban', '플레이어를 영구히 추방합니다.', '/ban <Player>', [
       [ParameterType.PLAYER],
       [ParameterType.PLAYER, ParameterType.STRING]
@@ -19,7 +19,7 @@ class BanCommand extends Command {
     bannedPlayers = fs.readFileSync(banPath).toString().split('\n')
   }
 
-  execute(parameterNumber, sender, parameter) {
+  execute (parameterNumber, sender, parameter) {
     let player
     switch (parameterNumber) {
       case 0:
@@ -45,7 +45,7 @@ class BanCommand extends Command {
     }
   }
 
-  getListener() {
+  getListener () {
     return (event) => {
       var address = event.getAddress()
       if (bannedPlayers.indexOf(address) != -1) {

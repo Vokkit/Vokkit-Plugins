@@ -23,6 +23,8 @@ class KickCommand extends Command {
         player.getSocket().emit('kick', {
           reason: message
         })
+        Vokkit.getServer().getLogger().info('kick')
+        break
       default:
         sender.sendMessage(this.getUsage())
         break

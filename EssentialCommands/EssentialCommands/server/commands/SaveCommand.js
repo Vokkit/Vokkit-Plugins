@@ -1,5 +1,4 @@
 const Command = require('../../../../src/io/github/Vokkit/command/commands/Command.js')
-const ParameterType = require('../../../../src/io/github/Vokkit/command/parameter/ParameterType.js')
 
 class SaveCommand extends Command {
   constructor () {
@@ -16,7 +15,7 @@ class SaveCommand extends Command {
           worlds[i].saveWorld()
         }
         Vokkit.getServer().getLogger().info('월드를 저장했습니다.')
-      // You don't have to use 'break', because is is unreachable code.
+        break
       default:
         sender.sendMessage(this.getUsage())
         break

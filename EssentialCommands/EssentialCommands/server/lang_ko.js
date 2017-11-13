@@ -1,6 +1,6 @@
 const BaseLang = require('./BaseLang.js')
 
-class lang_ko extends BaseLang {
+class Korean extends BaseLang {
   constructor () {
     super()
     this.data = {
@@ -11,4 +11,4 @@ class lang_ko extends BaseLang {
   }
 }
 
-module.exports = lang_ko
+module.exports = Korean

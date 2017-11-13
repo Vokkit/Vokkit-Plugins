@@ -48,7 +48,7 @@ class BanCommand extends Command {
   getListener () {
     return (event) => {
       var address = event.getAddress()
-      if (bannedPlayers.indexOf(address) != -1) {
+      if (bannedPlayers.indexOf(address) !== -1) {
         event.getPlayer().getSocket().emit('kick', {
           reason: lang.format('ban')
         })

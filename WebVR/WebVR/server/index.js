@@ -5,16 +5,13 @@ const PluginBase = require('../../../src/io/github/Vokkit/plugin/PluginBase.js')
 const EventPriority = require('../../../src/io/github/Vokkit/event/EventPriority.js')
 
 class Main extends PluginBase {
-  onEnable() {
+
+  onEnable () {
     Vokkit.getServer().getPluginManager().registerEvent(this, 'PlayerLoginEvent', this.onPlayerLogin)
     Vokkit.getServer().getPluginManager().registerEvent(this, 'PlayerMoveEvent', this.onPlayerMove, EventPriority.MONITOR)
-    
   }
 
-  /**
-   * @param {PlayerLoginEvent} event 
-   */
-  onPlayerLogin(event) {
+  onPlayerLogin (event) {
     if (event.getPlayer().getName().endsWith('_Mobile')) {
       event.setCancelled(true)
       event.setReason('_Mobile로 끝나는 이름을 사용할 수 없습니다.')
@@ -23,7 +20,7 @@ class Main extends PluginBase {
     if (event.getPlayer().getType() === 'Mobile') {
       const name = event.getPlayer().getName()
       event.getPlayer().setName(name + '_Mobile')
-      event.getPlayer().getSocket().on('VRRotation', function(data) {
+      event.getPlayer().getSocket().on('VRRotation', function (data) {
         const pcPlayer = Vokkit.getServer().getPlayer(name)
         if (pcPlayer !== null) {
           const location = pcPlayer.getLocation()
@@ -35,12 +32,9 @@ class Main extends PluginBase {
     }
   }
 
-  /**
-   * @param {PlayerMoveEvent} event 
-   */
-  onPlayerMove(event) {
+  onPlayerMove (event) {
     if (event.getPlayer().getType() === 'PC') {
-      let mobilePlayer = Vokkit.getServer().getPlayer(event.getPlayer().getName() + '_Mobile')
+      const mobilePlayer = Vokkit.getServer().getPlayer(event.getPlayer().getName() + '_Mobile')
       if (mobilePlayer) {
         mobilePlayer.teleport(event.getTo())
       }

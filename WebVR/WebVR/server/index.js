@@ -1,14 +1,15 @@
-/// <reference path='../../../../Vokkit-types/index.d.ts' />
-// 위 Reference에 대해서는 https://github.com/Vokkit/Vokkit-types을 참고하십시오.
-
 const PluginBase = require('../../../src/io/github/Vokkit/plugin/PluginBase.js')
 const EventPriority = require('../../../src/io/github/Vokkit/event/EventPriority.js')
+const FixCommand = require('./commands/FixCommand')
+
+const fix = []
 
 class Main extends PluginBase {
 
   onEnable () {
     Vokkit.getServer().getPluginManager().registerEvent(this, 'PlayerLoginEvent', this.onPlayerLogin)
     Vokkit.getServer().getPluginManager().registerEvent(this, 'PlayerMoveEvent', this.onPlayerMove, EventPriority.MONITOR)
+    Vokkit.getServer().getCommandManager().getCommandProvider().register(new FixCommand(fix))
   }
 
   onPlayerLogin (event) {
@@ -20,11 +21,12 @@ class Main extends PluginBase {
     if (event.getPlayer().getType() === 'Mobile') {
       const name = event.getPlayer().getName()
       event.getPlayer().setName(name + '_Mobile')
-      event.getPlayer().getSocket().on('VRRotation', function (data) {
+      event.getPlayer().getSocket().on('VRRotation', (data) => {
         const pcPlayer = Vokkit.getServer().getPlayer(name)
         if (pcPlayer !== null) {
+          if (!fix[pcPlayer.getName()]) fix[pcPlayer.getName()] = 0
           const location = pcPlayer.getLocation()
-          location.setYaw(data.yaw)
+          location.setYaw(fix[pcPlayer.getName()] + data.yaw)
           location.setPitch(data.pitch)
           pcPlayer.teleport(location)
         }

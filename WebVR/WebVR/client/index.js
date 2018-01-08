@@ -82,37 +82,18 @@ class Main extends PluginBase {
       quaternion.multiply(q1)
       quaternion.multiply(q0.setFromAxisAngle(zee, -orient))
       object.quaternion.copy(quaternion)
-      const direction = Vokkit.getClient().getScreenManager().getScreen('MainScreen').getCamera().getWorldDirection()
       const objectDirection = object.getWorldDirection()
       const pitch = Math.asin(-objectDirection.y)
-      const yaw = -Math.atan2(direction.x, direction.z)
       const objectYaw = -Math.atan2(objectDirection.x, objectDirection.z)
       main.pitch = pitch
-
-      let average = 0
-
-      if (rotations.length < 25) rotations.push(yaw - objectYaw)
-      else {
-        for (let i = 1; i < 25; i++) {
-          rotations[i - 1] = rotations[i]
-          if (i === 24) rotations[24] = yaw - objectYaw
-        }
-      }
-
-      for (let i = 0; i < rotations.length; i++) {
-        average += rotations[i]
-      }
-      average /= rotations.length
-
-      main.yaw = objectYaw + average
-
+      main.yaw = objectYaw
       if (main.display !== undefined && main.display.isPresenting) {
         socket.emit('VRRotation', {
           yaw: main.yaw,
           pitch: main.pitch
         })
       }
-    }, true)
+    }, true) // 일단 실패했으므로 주작질을 행할것
 
     window.addEventListener('vrdisplaypresentchange', function () {
       if (main.display === undefined || !main.display.isPresenting) {
